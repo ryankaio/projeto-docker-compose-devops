@@ -146,7 +146,13 @@ Objetivos do pipeline:
 
 ### Print 7 - Execução do GitHub Actions
 
-> Inserir imagem aqui
+Execução feita corretamente
+
+![verde](doc/image/execução-feita.png)
+
+Arquivo modificado para da erro
+
+![vermelho](doc/image/execução-falha.png)
 
 ---
 
