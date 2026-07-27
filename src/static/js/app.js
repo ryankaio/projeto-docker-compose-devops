@@ -1,4 +1,4 @@
-functi App() {
+function App() {
     const { Container, Row, Col } = ReactBootstrap;
     return (
         <Container>
