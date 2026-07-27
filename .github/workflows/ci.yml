@@ -1,0 +1,21 @@
+name: Docker CI
+
+on:
+  push:
+    branches:
+      - main
+      - master
+  pull_request:
+
+jobs:
+  docker:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build da imagem
+        run: docker build -t todo-app .
+
+      - name: Validar Compose
+        run: docker compose config

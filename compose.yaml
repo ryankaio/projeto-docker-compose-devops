@@ -1,0 +1,43 @@
+services:
+  app:
+    build: .
+    container_name: todo-app
+    ports:
+      - "3000:3000"
+    environment:
+      MYSQL_HOST: db
+      MYSQL_USER: todo
+      MYSQL_PASSWORD: secret
+      MYSQL_DB: todos
+    depends_on:
+      db:
+        condition: service_healthy
+    volumes:
+      - todo-db:/etc/todos
+    networks:
+      - todo-net
+
+  db:
+    image: mysql:8.4
+    container_name: todo-db
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: todos
+      MYSQL_USER: todo
+      MYSQL_PASSWORD: secret
+    volumes:
+      - mysql-data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - todo-net
+
+volumes:
+  todo-db:
+  mysql-data:
+
+networks:
+  todo-net:
